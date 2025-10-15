@@ -128,7 +128,7 @@ Esta seção é o coração do projeto. Aqui, eu utilizei o dataset limpo e cons
 
 **Pergunta 1: Qual a distribuição de faixas por artista no dataset?**
 * **Objetivo:** Investigar a distribuição para identificar a estrutura do dataset e potenciais vieses de coleta, uma etapa crítica antes de prosseguir com análises de ranking.
-* **Insight:** A análise revelou um forte viés, com cerca de **27% dos artistas** possuindo exatamente 10 faixas. Isso indicou que o dataset foi provavelmente construído a partir de "Top 10s", uma descoberta crucial para contextualizar todas as análises de ranking subsequentes.
+* **Insight:** A análise revelou uma **distribuição de dados polarizada** e um forte viés de coleta. Por um lado, **853 artistas (cerca de 27%)** estavam artificialmente limitados a exatamente 10 faixas. Por outro, um grupo ainda maior de **992 artistas (cerca de 32%)** estava representado por uma única música (a clássica "cauda longa"). Esta descoberta foi crucial, pois provou que um simples ranking de "Top Artistas por Nº de Músicas" seria enganoso e definiu a necessidade de uma abordagem mais crítica nas análises seguintes.
 
 **Pergunta 2: Quais são os álbuns mais populares?**
 * **Objetivo:** Identificar os álbuns com maior engajamento agregado (soma de streams) para responder a uma pergunta de negócio fundamental sobre quais projetos musicais foram mais consumidos.
