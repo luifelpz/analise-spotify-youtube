@@ -147,13 +147,13 @@ Esta seção é o coração do projeto. Aqui, eu utilizei o dataset limpo e cons
 * **Insight:** Criei uma métrica de "diferença" para rankear as faixas com maior dominância em cada plataforma. Isso revelou dois perfis distintos de sucesso: faixas que são "hinos de streaming" no Spotify e outras que são "fenômenos visuais" no YouTube.
 ---
 >
-> `![Top 5 Diferença entre Spotify e YouTube](./images/diferenca_spotify_vs_youtube.png)`
+> ![Top 5 Diferença entre Spotify e YouTube](./images/diferenca_spotify_vs_youtube.png)
 >
 ---
 
 ---
 >
-> `![Top 5 Diferença entre Youtube e Spotify](./images/diferenca_youtube_vs_spotify.png)`
+> ![Top 5 Diferença entre Youtube e Spotify](./images/diferenca_youtube_vs_spotify.png)
 >
 ---
 
