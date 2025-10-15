@@ -196,14 +196,14 @@ Esta seção é o coração do projeto. Aqui, eu utilizei o dataset limpo e cons
 
 3.  **Verificação (Validação do Resultado):** Executei novamente o mesmo `EXPLAIN ANALYZE` após a criação do índice. O novo plano de execução confirmou o uso de um `"Index Scan"`, com uma redução drástica no custo computacional e no tempo de execução da consulta.
 
-> **[SUGESTÃO DE IMAGEM]**
->
-> **Onde:** Após o item 3 da lista acima.
->
-> **O quê:** Este é o lugar perfeito para um print comparativo. Tire um print do resultado do `EXPLAIN ANALYZE` **antes** do índice e outro **depois**. Coloque as duas imagens lado a lado para mostrar visualmente a diferença no plano de execução e, principalmente, a diminuição no `execution time`.
->
-> `![Comparativo de Otimização com Índice](./images/NOME_DA_SUA_IMAGEM_AQUI.png)`
+---
+> ![Antes com Sequential Scan](./images/seq_scan.png)
+---
+> ![Depois com Index Scan](./images/index_scan.png)
+---
 
 **Conclusão da Otimização:** Este ciclo de diagnóstico, solução e verificação não apenas provou a eficácia do índice, mas também demonstrou uma competência fundamental em engenharia de dados: a capacidade de identificar gargalos de performance e resolvê-los de forma metódica.
 
 > *O script completo com o ciclo de otimização está disponível no arquivo `sql/05_optimization.sql`.*
+
+   
