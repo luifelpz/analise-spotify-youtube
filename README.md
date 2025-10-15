@@ -1,9 +1,9 @@
 # Análise de Métricas Musicais e Engajamento (Spotify & YouTube)
 
----
 > 
 > ![Análise - Dataset - Spotify & Youtube](./images/spotify_youtube.png)
 >
+
 ---
 
 ## 1. Introdução e Contexto do Projeto
