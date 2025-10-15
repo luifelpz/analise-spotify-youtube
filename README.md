@@ -176,7 +176,7 @@ Esta seção é o coração do projeto. Aqui, eu utilizei o dataset limpo e cons
 
 **Pergunta 8: Como o engajamento (likes) se acumula com a popularidade?**
 * **Objetivo:** Calcular a soma cumulativa de `likes` ao longo do ranking de popularidade, demonstrando como o engajamento se concentra nas faixas do topo.
-* **Insight:** A análise provou visualmente o "Princípio de Pareto" (regra 80/20) nos dados, mostrando que uma pequena porcentagem das faixas mais vistas acumula a vasta maioria dos likes, um insight crucial para estratégias de marketing e promoção.
+* **Insight:** A análise mostrou o "Princípio de Pareto" (regra 80/20) nos dados, mostrando que uma pequena porcentagem das faixas mais vistas acumula a vasta maioria dos likes, um insight crucial para estratégias de marketing e promoção.
 
 **Pergunta 9: Quais são as faixas que se destacam por serem "ao vivo"?**
 * **Objetivo:** Usar uma métrica agregada (a média geral de `Liveness`) como um baseline para segmentar o dataset e identificar faixas que se destacam em relação à norma.
