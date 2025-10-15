@@ -62,11 +62,11 @@ O projeto está organizado em diretórios e scripts sequenciais para refletir um
 
 ```
 
+
+
 ## 5. A Jornada Técnica: Do Dado Bruto ao Insight
 
 Esta seção detalha o processo técnico completo, dividido nos blocos de código SQL que compõem este projeto. Cada bloco representa uma etapa lógica no ciclo de vida da análise de dados, com o código-fonte detalhado disponível nos respectivos arquivos `.sql` do repositório.
-
-
 
 
 
@@ -94,16 +94,6 @@ Esta seção detalha o processo técnico completo, dividido nos blocos de códig
 1.  **A Natureza Híbrida do Dataset:** A análise da coluna `most_played_on` revelou que o dataset não era puramente do Spotify, mas sim uma combinação de dados do Spotify e do YouTube. Essa descoberta foi estratégica e levou à decisão de renomear e redefinir o escopo do projeto.
 2.  **Identificação de Dados Inválidos:** Investiguei a qualidade dos dados e encontrei registros com valores fisicamente impossíveis, como `duration_min = 0` e `tempo = 0`, que foram marcados para remoção.
 3.  **Descoberta de Duplicatas:** A EDA revelou um problema de qualidade de dados significativo: a mesma faixa musical aparecia em múltiplas linhas, atribuída a artistas ligeiramente diferentes.
-4.  **Viés na Coleta de Dados:** A análise da distribuição de faixas por artista expôs um forte viés de coleta, com 853 artistas (cerca de 27% do total) limitados a exatamente 10 faixas, sugerindo que o dataset foi criado a partir de "Top 10s".
-
----
-> **[SUGESTÃO DE IMAGEM]**
-> 
-> O print abaixo ilustra a descoberta sobre o viés de coleta, mostrando a tabela de frequência gerada pela análise:
-> 
-> ![Tabela de distribuição de faixas por artista](./images/NOME_DA_SUA_IMAGEM_AQUI.png)
->
----
 
 Todas essas descobertas foram documentadas e serviram como a justificativa direta para as ações tomadas na etapa seguinte.
 
@@ -155,16 +145,18 @@ Esta seção é o coração do projeto. Aqui, eu utilizei o dataset limpo e cons
 **Pergunta 4: Quais faixas dominam em cada plataforma (Spotify vs. YouTube)?**
 * **Objetivo:** Comparar diretamente a popularidade de cada faixa nas duas plataformas para identificar quais músicas performam melhor em cada ecossistema.
 * **Insight:** Criei uma métrica de "diferença" para rankear as faixas com maior dominância em cada plataforma. Isso revelou dois perfis distintos de sucesso: faixas que são "hinos de streaming" no Spotify e outras que são "fenômenos visuais" no YouTube.
-
-> **[SUGESTÃO DE IMAGEM]**
+---
 >
-> **Onde:** Após o insight da Pergunta 4.
+> `![Top 5 Diferença entre Spotify e YouTube](./images/diferenca_spotify_vs_youtube.png)`
 >
-> **O quê:** Tire um print dos resultados das duas tabelas (Top 5 do Spotify e Top 5 do YouTube). Colocar as duas imagens lado a lado ilustra perfeitamente a diferença nos padrões de consumo.
->
-> `![Top 5 Spotify vs YouTube](./images/NOME_DA_SUA_IMAGEM_AQUI.png)`
+---
 
 ---
+>
+> `![Top 5 Diferença entre Youtube e Spotify](./images/diferenca_youtube_vs_spotify.png)`
+>
+---
+
 #### **Capítulo 3: O DNA Musical (Análise Profunda dos Atributos)**
 *Neste capítulo, mergulhei nos detalhes técnicos da música para entender as características sonoras que definem as faixas do nosso dataset.*
 
