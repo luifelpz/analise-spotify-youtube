@@ -44,8 +44,9 @@ O projeto está organizado em diretórios e scripts sequenciais para refletir um
 |   |-- 04_analysis.sql     # Queries da análise principal (perguntas de negócio)
 |   |-- 05_optimization.sql # Demonstração de otimização de consulta com índices
 |
-|-- README.md               <-- A documentação principal do projeto que você está lendo
 |-- LICENSE                 <-- A licença de uso do código e do projeto
+|-- README.md               <-- A documentação principal do projeto que você está lendo
+
 ```
 
 ## 5. A Jornada Técnica: Do Dado Bruto ao Insight
