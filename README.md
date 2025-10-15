@@ -52,6 +52,10 @@ O projeto está organizado em diretórios e scripts sequenciais para refletir um
 
 Esta seção detalha o processo técnico completo, dividido nos blocos de código SQL que compõem este projeto. Cada bloco representa uma etapa lógica no ciclo de vida da análise de dados, com o código-fonte detalhado disponível nos respectivos arquivos `.sql` do repositório.
 
+
+
+
+
 ### 5.1. Bloco 01: Criação da Estrutura (Schema)
 
 **Objetivo:** A primeira etapa foi definir uma estrutura de tabela robusta e semanticamente correta no PostgreSQL. Uma base bem estruturada é o alicerce para qualquer análise de dados confiável.
@@ -63,6 +67,9 @@ Esta seção detalha o processo técnico completo, dividido nos blocos de códig
 * **Ordem das Colunas:** A ordem das colunas no `CREATE TABLE` foi definida para espelhar exatamente a ordem do arquivo `.csv` de origem, garantindo uma ingestão de dados correta e sem falhas.
 
 > *O código SQL completo para a criação da tabela está documentado no arquivo `sql/01_schema.sql`.*
+
+
+
 
 ### 5.2. Bloco 02: Análise Exploratória de Dados (EDA)
 
@@ -88,11 +95,22 @@ Todas essas descobertas foram documentadas e serviram como a justificativa diret
 
 > *Todas as queries utilizadas para esta exploração estão disponíveis no arquivo `sql/02_eda.sql`.*
 
+
+
+
 ### 5.3. Bloco 03: Limpeza de Dados (Data Cleaning)
 
 **Objetivo:** Com os problemas e anomalias identificados na Análise Exploratória, esta etapa foi dedicada a tratar cada um deles de forma sistemática para garantir a integridade e a consistência do dataset.
 
 **Processos de Limpeza Executados:**
+
+* **Consolidação de Faixas Duplicadas:** Para resolver o problema de duplicatas, implementei um processo robusto que agrupou os registros idênticos, combinou os nomes dos artistas em um único campo (usando `|` como separador seguro) e substituiu as várias linhas duplicadas por um único registro "mestre".
+* **Remoção de Dados Inválidos:** Registros com `duration_min = 0` e `tempo = 0` foram removidos, pois representam valores fisicamente impossíveis que distorceriam qualquer análise estatística.
+* **Remoção de Dados Irrelevantes:** Faixas com `stream = 0` foram excluídas para focar a análise na popularidade e engajamento, que são o cerne do projeto.
+
+> *A implementação de todas estas regras de limpeza, com verificações "antes e depois", pode ser encontrada no script `sql/03_cleaning.sql`.*
+
+
 
 ### 5.4. Bloco 04: Análise dos Dados (Analysis)
 
@@ -160,8 +178,28 @@ Esta seção é o coração do projeto. Aqui, eu utilizei o dataset limpo e cons
 * **Objetivo:** Usar uma métrica agregada (a média geral de `Liveness`) como um baseline para segmentar o dataset e identificar faixas que se destacam em relação à norma.
 * **Insight:** A consulta filtrou com sucesso um conjunto de faixas com alta probabilidade de serem gravações ao vivo, demonstrando uma técnica eficaz para encontrar outliers positivos com base em uma característica específica.
 
-* **Consolidação de Faixas Duplicadas:** Para resolver o problema de duplicatas, implementei um processo robusto que agrupou os registros idênticos, combinou os nomes dos artistas em um único campo (usando `|` como separador seguro) e substituiu as várias linhas duplicadas por um único registro "mestre".
-* **Remoção de Dados Inválidos:** Registros com `duration_min = 0` e `tempo = 0` foram removidos, pois representam valores fisicamente impossíveis que distorceriam qualquer análise estatística.
-* **Remoção de Dados Irrelevantes:** Faixas com `stream = 0` foram excluídas para focar a análise na popularidade e engajamento, que são o cerne do projeto.
 
-> *A implementação de todas estas regras de limpeza, com verificações "antes e depois", pode ser encontrada no script `sql/03_cleaning.sql`.*
+
+### 5.5. Bloco 05: Otimização de Consulta (Query Optimization)
+
+**Objetivo:** Para concluir a jornada técnica, o foco mudou da análise dos dados para a **eficiência do acesso** a eles. Esta etapa demonstra uma abordagem proativa em relação à performance, simulando um caso de uso comum – buscar as faixas de um artista específico – e otimizando a consulta para garantir uma resposta rápida e eficiente.
+
+**O Processo de Otimização em 3 Passos:**
+
+1.  **Diagnóstico (Baseline):** Utilizei o comando `EXPLAIN ANALYZE` para gerar um plano de execução da consulta *antes* de qualquer otimização. A análise revelou que o PostgreSQL estava realizando um `"Sequential Scan"`, ou seja, lendo a tabela inteira linha por linha para encontrar os dados, o que é altamente ineficiente para tabelas grandes.
+
+2.  **Solução (Criação de Índice):** Com base no diagnóstico, a solução foi criar um **Índice B-Tree** na coluna `artist`. Um índice funciona como o índice de um livro, permitindo que o banco de dados localize os dados de um artista específico de forma quase instantânea, sem precisar varrer toda a tabela.
+
+3.  **Verificação (Validação do Resultado):** Executei novamente o mesmo `EXPLAIN ANALYZE` após a criação do índice. O novo plano de execução confirmou o uso de um `"Index Scan"`, com uma redução drástica no custo computacional e no tempo de execução da consulta.
+
+> **[SUGESTÃO DE IMAGEM]**
+>
+> **Onde:** Após o item 3 da lista acima.
+>
+> **O quê:** Este é o lugar perfeito para um print comparativo. Tire um print do resultado do `EXPLAIN ANALYZE` **antes** do índice e outro **depois**. Coloque as duas imagens lado a lado para mostrar visualmente a diferença no plano de execução e, principalmente, a diminuição no `execution time`.
+>
+> `![Comparativo de Otimização com Índice](./images/NOME_DA_SUA_IMAGEM_AQUI.png)`
+
+**Conclusão da Otimização:** Este ciclo de diagnóstico, solução e verificação não apenas provou a eficácia do índice, mas também demonstrou uma competência fundamental em engenharia de dados: a capacidade de identificar gargalos de performance e resolvê-los de forma metódica.
+
+> *O script completo com o ciclo de otimização está disponível no arquivo `sql/05_optimization.sql`.*
