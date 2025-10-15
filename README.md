@@ -1,10 +1,19 @@
 # Análise de Métricas Musicais e Engajamento (Spotify & YouTube)
 
+---
+> 
+> ![Análise - Dataset - Spotify & Youtube](./images/spotify_youtube.png)
+>
+---
+
 ## 1. Introdução e Contexto do Projeto
 
 Este projeto representa um mergulho profundo no universo da análise de dados musicais, utilizando um dataset híbrido que combina métricas técnicas da API do Spotify com dados de popularidade de vídeos do YouTube. O objetivo principal não foi apenas responder a perguntas de negócio, mas sim demonstrar um fluxo de trabalho analítico completo e profissional, desde a estruturação inicial dos dados em PostgreSQL até a otimização de consultas.
 
 Ao longo desta análise, identifiquei e tratei problemas de qualidade de dados, explorei as características que definem a "personalidade" das músicas e desenvolvi queries complexas para extrair insights que não eram óbvios à primeira vista. A narrativa deste projeto foi estruturada para simular um desafio real de análise de dados, onde o pensamento crítico e a capacidade de adaptar a metodologia foram tão importantes quanto a proficiência técnica em SQL.
+
+
+
 
 ## 2. Objetivo Principal
 
@@ -18,6 +27,10 @@ O objetivo deste projeto foi duplo:
     * **Otimização de Consultas:** Diagnóstico de performance com `EXPLAIN ANALYZE` e solução com a criação de Índices.
 
 * **Analítico:** Utilizar o dataset para extrair insights sobre a popularidade e as características de faixas musicais, estabelecendo as bases para futuros projetos de Business Intelligence e Machine Learning.
+
+
+
+
 
 ## 3. Ferramentas e Tecnologias Utilizadas
 
