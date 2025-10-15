@@ -94,6 +94,72 @@ Todas essas descobertas foram documentadas e serviram como a justificativa diret
 
 **Processos de Limpeza Executados:**
 
+### 5.4. Bloco 04: Análise dos Dados (Analysis)
+
+Esta seção é o coração do projeto. Aqui, eu utilizei o dataset limpo e consolidado para responder a uma série de perguntas de negócio, estruturadas em capítulos para contar uma história sobre os dados. O objetivo foi demonstrar não apenas a extração de dados, mas a capacidade de gerar insights acionáveis e comunicar descobertas de forma clara.
+
+> *Todas as queries detalhadas para esta seção estão disponíveis no arquivo `sql/04_analysis.sql`.*
+
+---
+#### **Capítulo 1: O Panorama Geral (Agregações Fundamentais)**
+*Comecei a análise do macro para o micro, entendendo primeiro a estrutura geral do dataset e os principais grupos de interesse.*
+
+**Pergunta 1: Qual a distribuição de faixas por artista no dataset?**
+* **Objetivo:** Investigar a distribuição para identificar a estrutura do dataset e potenciais vieses de coleta, uma etapa crítica antes de prosseguir com análises de ranking.
+* **Insight:** A análise revelou um forte viés, com cerca de **27% dos artistas** possuindo exatamente 10 faixas. Isso indicou que o dataset foi provavelmente construído a partir de "Top 10s", uma descoberta crucial para contextualizar todas as análises de ranking subsequentes.
+
+**Pergunta 2: Quais são os álbuns mais populares?**
+* **Objetivo:** Identificar os álbuns com maior engajamento agregado (soma de streams) para responder a uma pergunta de negócio fundamental sobre quais projetos musicais foram mais consumidos.
+* **Insight:** Ao agregar os streams por álbum, foi possível criar um ranking claro dos projetos mais populares. Esta análise serve como base para entender quais álbuns geram mais valor de consumo na plataforma.
+
+---
+#### **Capítulo 2: Os Grandes Sucessos (Ranking e Segmentação de Popularidade)**
+*Após a visão geral, foquei nos destaques individuais e nas comparações de alto nível para identificar as faixas de maior impacto.*
+
+**Pergunta 3: Quais faixas pertencem ao "Clube do Bilhão" de streams?**
+* **Objetivo:** Segmentar e identificar um grupo de elite de faixas que atingiram o marco de 1 bilhão de streams, representando os maiores sucessos globais presentes no dataset.
+* **Insight:** A consulta isolou um grupo seleto de faixas que representam o ápice da popularidade, sendo um excelente ponto de partida para analisar as características comuns dos maiores hits.
+
+**Pergunta 4: Quais faixas dominam em cada plataforma (Spotify vs. YouTube)?**
+* **Objetivo:** Comparar diretamente a popularidade de cada faixa nas duas plataformas para identificar quais músicas performam melhor em cada ecossistema.
+* **Insight:** Criei uma métrica de "diferença" para rankear as faixas com maior dominância em cada plataforma. Isso revelou dois perfis distintos de sucesso: faixas que são "hinos de streaming" no Spotify e outras que são "fenômenos visuais" no YouTube.
+
+> **[SUGESTÃO DE IMAGEM]**
+>
+> **Onde:** Após o insight da Pergunta 4.
+>
+> **O quê:** Tire um print dos resultados das duas tabelas (Top 5 do Spotify e Top 5 do YouTube). Colocar as duas imagens lado a lado ilustra perfeitamente a diferença nos padrões de consumo.
+>
+> `![Top 5 Spotify vs YouTube](./images/NOME_DA_SUA_IMAGEM_AQUI.png)`
+
+---
+#### **Capítulo 3: O DNA Musical (Análise Profunda dos Atributos)**
+*Neste capítulo, mergulhei nos detalhes técnicos da música para entender as características sonoras que definem as faixas do nosso dataset.*
+
+**Pergunta 5: Quais são os extremos de cada atributo musical?**
+* **Objetivo:** Explorar sistematicamente os extremos de cada um dos 9 atributos musicais (ex: Danceability, Energy). Ao identificar o Top 5, o Bottom 5 e a Média de cada atributo, criei um perfil detalhado da diversidade sonora do dataset.
+* **Insight:** Esta análise revelou os perfis sonoros extremos presentes na plataforma, desde as faixas mais dançantes e energéticas até as mais calmas e acústicas, servindo como uma base fundamental para a futura criação de playlists temáticas.
+
+**Pergunta 6: Quais álbuns possuem a maior diversidade sonora?**
+* **Objetivo:** Criar uma métrica derivada (`range` de energia) para quantificar a diversidade sonora *dentro* de cada álbum.
+* **Insight:** A análise identificou os álbuns que oferecem a maior "jornada" sonora, variando de faixas muito calmas a muito energéticas. Este é um critério de recomendação valioso para ouvintes que apreciam dinamismo em um álbum.
+
+---
+#### **Capítulo 4: Técnicas Avançadas de SQL (Análises Contextuais e de Ranking)**
+*Finalizei a análise com demonstrações de técnicas SQL sofisticadas para resolver perguntas de negócio complexas que exigem funções de janela.*
+
+**Pergunta 7: Quais são as 3 faixas mais populares de cada artista?**
+* **Objetivo:** Demonstrar a capacidade de criar rankings segmentados, utilizando a função de janela `PARTITION BY`.
+* **Insight:** Em vez de um ranking global, esta análise forneceu um "Top 3" personalizado para cada artista, uma técnica fundamental para sistemas de recomendação e relatórios personalizados.
+
+**Pergunta 8: Como o engajamento (likes) se acumula com a popularidade?**
+* **Objetivo:** Calcular a soma cumulativa de `likes` ao longo do ranking de popularidade, demonstrando como o engajamento se concentra nas faixas do topo.
+* **Insight:** A análise provou visualmente o "Princípio de Pareto" (regra 80/20) nos dados, mostrando que uma pequena porcentagem das faixas mais vistas acumula a vasta maioria dos likes, um insight crucial para estratégias de marketing e promoção.
+
+**Pergunta 9: Quais são as faixas que se destacam por serem "ao vivo"?**
+* **Objetivo:** Usar uma métrica agregada (a média geral de `Liveness`) como um baseline para segmentar o dataset e identificar faixas que se destacam em relação à norma.
+* **Insight:** A consulta filtrou com sucesso um conjunto de faixas com alta probabilidade de serem gravações ao vivo, demonstrando uma técnica eficaz para encontrar outliers positivos com base em uma característica específica.
+
 * **Consolidação de Faixas Duplicadas:** Para resolver o problema de duplicatas, implementei um processo robusto que agrupou os registros idênticos, combinou os nomes dos artistas em um único campo (usando `|` como separador seguro) e substituiu as várias linhas duplicadas por um único registro "mestre".
 * **Remoção de Dados Inválidos:** Registros com `duration_min = 0` e `tempo = 0` foram removidos, pois representam valores fisicamente impossíveis que distorceriam qualquer análise estatística.
 * **Remoção de Dados Irrelevantes:** Faixas com `stream = 0` foram excluídas para focar a análise na popularidade e engajamento, que são o cerne do projeto.
