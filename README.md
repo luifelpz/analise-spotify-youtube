@@ -150,8 +150,6 @@ Esta seção é o coração do projeto. Aqui, eu utilizei o dataset limpo e cons
 > ![Top 5 Diferença entre Spotify e YouTube](./images/diferenca_spotify_vs_youtube.png)
 >
 ---
-
----
 >
 > ![Top 5 Diferença entre Youtube e Spotify](./images/diferenca_youtube_vs_spotify.png)
 >
